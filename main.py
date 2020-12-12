@@ -31,10 +31,8 @@ acc_random_forest = round(random_forest.score(X_train, Y_train) * 100, 2)
 
 # Artificial Neural Networks
 model = Sequential()
-model.add(Dense(input_dim=8, units=4))
-model.add(LeakyReLU())
-model.add(Dense(units=1))
-model.add(LeakyReLU())
+model.add(Dense(input_dim=8, units=16, activation='relu'))
+model.add(Dense(units=8, activation='relu'))
 model.add(Dense(units=1, activation='sigmoid'))
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 history = model.fit(X_train, Y_train, validation_split=0.20, batch_size=10, epochs=500, verbose=0, shuffle=True)
@@ -50,7 +48,7 @@ print()
 # Pclass  Sex  Age  Fare  Deck  Embarked  FamilySize  Title
 # jacki 3rd male 20 0$ G S 1 Mr
 # rose 1st female 17 200$ B S 3 Miss
-jacki_and_rose = [[3, 0, 3, 0, 7, 0, 1, 1],
+jacki_and_rose = [[3, 0, 3, 1, 7, 0, 1, 1],
                   [1, 1, 2, 5, 2, 0, 3, 3]]
 predictions = model.predict(jacki_and_rose)
 jack = round(predictions.flat[0] * 100, 2)
